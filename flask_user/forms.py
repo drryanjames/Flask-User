@@ -204,9 +204,9 @@ class LoginForm(FlaskForm):
             if user_manager.verify_password(self.password.data, user.password):
                 return True                         # Successful authentication
 
-            # Send user_password_invalid signal
+            # Send user_password_failed signal
             else:
-                signals.user_password_invalid.send(current_app._get_current_object(), user=user)
+                signals.user_password_failed.send(current_app._get_current_object(), user=user)
 
         # Handle unsuccessful authentication
         # Email, Username or Email/Username depending on settings
